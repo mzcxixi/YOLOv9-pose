@@ -49,7 +49,9 @@ from .block import (
     PSA,
     C2fCIB,
     SCDown,
-    RepVGGDW
+    RepVGGDW,
+    AConv,
+    ELAN1
 )
 from .conv import (
     CBAM,
@@ -143,5 +145,7 @@ __all__ = (
     "C2fCIB",
     "SCDown",
     "RepVGGDW",
-    "v10Detect"
+    "v10Detect",
+    "AConv",
+    "ELAN1",
 )

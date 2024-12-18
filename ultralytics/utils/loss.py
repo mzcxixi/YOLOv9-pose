@@ -446,7 +446,10 @@ class v8PoseLoss(v8DetectionLoss):
     def __call__(self, preds, batch):
         """Calculate the total loss and detach it."""
         loss = torch.zeros(5, device=self.device)  # box, cls, dfl, kpt_location, kpt_visibility
-        feats, pred_kpts = preds if isinstance(preds[0], list) else preds[1]
+        if isinstance(preds[0], list):
+            feats, pred_kpts = preds
+        else:
+            feats, pred_kpts =preds[1]
         pred_distri, pred_scores = torch.cat([xi.view(feats[0].shape[0], self.no, -1) for xi in feats], 2).split(
             (self.reg_max * 4, self.nc), 1
         )
@@ -562,7 +565,7 @@ class v8PoseLoss(v8DetectionLoss):
         # Expand dimensions of target_gt_idx to match the shape of batched_keypoints
         target_gt_idx_expanded = target_gt_idx.unsqueeze(-1).unsqueeze(-1)
 
-        # Use target_gt_idx_expanded to select keypoints from batched_keypoints
+        # Use target_gt_idx_expanded to select keypoints from batched_keypoints使用 target_gt_idx_expanded 从 batched_keypoints 中选择关键点。
         selected_keypoints = batched_keypoints.gather(
             1, target_gt_idx_expanded.expand(-1, -1, keypoints.shape[1], keypoints.shape[2])
         )
