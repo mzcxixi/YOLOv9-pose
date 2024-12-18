@@ -1,5 +1,5 @@
-train: /media/mzc/7ADE-3343/美国实验数据和数据集/dataset/keypointPose/train
-val: /media/mzc/7ADE-3343/美国实验数据和数据集/dataset/keypointPose/valid
+train: keypointPose/train
+val: keypointPose/valid
 
 
 kpt_shape: [2, 3]
